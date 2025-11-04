@@ -3,3 +3,8 @@ uvicorn
 sqlalchemy
 passlib
 python-dotenv
+pydantic
+python-jose[cryptography]
+bcrypt
+
+
