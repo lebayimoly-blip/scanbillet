@@ -17,10 +17,10 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",
+        "https://scanbillet-frontendb.onrender.com",  # ✅ frontend Render
+        "http://localhost:3000",                      # ✅ dev local
         "http://127.0.0.1:3000",
         "http://192.168.1.10:3000",
-        "https://scanbillet-frontendb.onrender.com",  # ✅ frontend Render
     ],
     allow_credentials=True,
     allow_methods=["*"],
