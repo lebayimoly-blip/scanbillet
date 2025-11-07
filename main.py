@@ -20,21 +20,22 @@ app.add_middleware(
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "http://192.168.1.10:3000",
+        "https://scanbillet-frontendb.onrender.com",  # ✅ frontend Render
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# 📦 Importation des routeurs
+# 📦 Importation des routeurs API
 from app.api.v1.scan import router as scan_router
 from app.api.v1.billet import router as billet_router
 from app.api.v1.stats import router as stats_router
 from app.api.v1.auth import router as auth_router
 from app.api.v1.sync import router as sync_router
-from scanbillet.routers import agents
-from scanbillet.routers import users
-from scanbillet.routers import auth  # ✅ Routeur d'authentification JWT
+
+# 📦 Importation des routeurs internes
+from scanbillet.routers import agents, users, auth
 
 # 📌 Inclusion des routeurs
 app.include_router(scan_router, prefix="/scan", tags=["Scan"])
