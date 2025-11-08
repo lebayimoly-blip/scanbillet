@@ -29,7 +29,7 @@ from app.api.v1.auth import router as auth_router
 from app.api.v1.sync import router as sync_router
 
 # 📦 Routeurs internes
-from scanbillet.routers import agents, users
+from routers import agents, users
 
 # 📌 Inclusion des routeurs
 app.include_router(scan_router, prefix="/scan", tags=["Scan"])
