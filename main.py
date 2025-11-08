@@ -1,5 +1,3 @@
-# scanbillet/main.py
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging
@@ -35,7 +33,7 @@ from routers import agents, users
 app.include_router(scan_router, prefix="/scan", tags=["Scan"])
 app.include_router(billet_router, prefix="/billet", tags=["Billet"])
 app.include_router(stats_router, prefix="/stats", tags=["Statistiques"])
-app.include_router(auth_router, prefix="/auth", tags=["Authentification"])  # ✅ version API
+app.include_router(auth_router, prefix="/auth", tags=["Authentification"])
 app.include_router(sync_router, prefix="/sync", tags=["Synchronisation"])
 
 # 🧩 Compatibilité frontend
@@ -44,7 +42,7 @@ app.include_router(users.router, prefix="/agents", tags=["Utilisateurs"])
 app.include_router(agents.router, prefix="/agents", tags=["Agents"])
 
 # 🧱 DB
-from scanbillet.database import engine, Base
-from scanbillet import models
+from database import engine, Base
+import models
 
 Base.metadata.create_all(bind=engine)
