@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
-from scanbillet.database import SessionLocal
-from scanbillet.models import User
+from database import SessionLocal
+from models import User
 from passlib.hash import bcrypt
 
 router = APIRouter()

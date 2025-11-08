@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from scanbillet.database import SessionLocal
-from scanbillet.models import User
+from database import SessionLocal
+from models import User
 from pydantic import BaseModel
 from passlib.hash import bcrypt
 from jose import jwt, JWTError
