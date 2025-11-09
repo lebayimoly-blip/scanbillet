@@ -7,4 +7,6 @@ passlib[bcrypt]
 pydantic
 python-dotenv
 bcrypt
+flask-cors
+
 
