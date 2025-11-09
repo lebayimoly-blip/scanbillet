@@ -1,11 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging
+from database import engine, Base
+import models
 
 logging.basicConfig(level=logging.DEBUG)
 
 app = FastAPI(title="ScanBillet API", debug=False)
 
+# 🛡️ CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -35,14 +38,24 @@ app.include_router(billet_router, prefix="/billet", tags=["Billet"])
 app.include_router(stats_router, prefix="/stats", tags=["Statistiques"])
 app.include_router(auth_router, prefix="/auth", tags=["Authentification"])
 app.include_router(sync_router, prefix="/sync", tags=["Synchronisation"])
-
-# 🧩 Compatibilité frontend
 app.include_router(users.router, prefix="/users", tags=["Utilisateurs"])
 app.include_router(users.router, prefix="/agents", tags=["Utilisateurs"])
 app.include_router(agents.router, prefix="/agents", tags=["Agents"])
 
-# 🧱 DB
-from database import engine, Base
-import models
-
+# 🧱 Initialisation de la base
 Base.metadata.create_all(bind=engine)
+
+# ✅ Route d’accueil
+@app.get("/")
+def root():
+    return {"message": "🚀 ScanBillet API est opérationnelle"}
+
+# ✅ Route de santé
+@app.get("/health")
+def health_check():
+    try:
+        with engine.connect() as conn:
+            conn.execute("SELECT 1")
+        return {"status": "ok"}
+    except Exception as e:
+        return {"status": "error", "details": str(e)}
